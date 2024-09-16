@@ -1,6 +1,6 @@
 import React from 'react'
 import logo from "../assets/logo.png";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 function NavBar({ cartCount }) {
     return (
@@ -14,17 +14,24 @@ function NavBar({ cartCount }) {
             </a>
 
             <div className=''>
-                <Link to="/" className="rounded-md bg-custom-gradient px-3 py-2 mr-5 text-sm font-medium text-white hover:bg-gradient-isInCart ">
+                <NavLink to="/" 
+                // className="rounded-md bg-custom-gradient px-3 py-2 mr-5 text-sm font-medium text-white hover:bg-gradient-isInCart "
+                className={({ isActive }) =>
+                    `rounded-md px-3 py-2 mr-5 text-sm font-medium ${isActive ? 'bg-custom-gradient text-white' : 'bg-custom-gradient text-black '}`
+                  }
+                >
                     Products
-                </Link>
-                <Link to="/cart" className="rounded-md bg-custom-gradient px-3 py-2 relative text-sm font-medium text-white hover:bg-gradient-isInCart ">
+                </NavLink>
+                <NavLink to="/cart"  className={({ isActive }) =>
+                    `rounded-md px-3 py-2 mr-5 text-sm font-medium  ${isActive ? 'bg-custom-gradient text-white' : 'bg-custom-gradient text-black'}`
+                  }>
                     Cart
                     {cartCount > 0 && (
                         <span className="absolute -top-3 -right-2 bg-custom-gradient rounded-full h-6 w-6 text-xs flex items-center justify-center">
                             {cartCount}
                         </span>
                     )}
-                </Link>
+                </NavLink>
             </div>
         </nav>
     )
