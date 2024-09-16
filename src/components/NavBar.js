@@ -23,7 +23,7 @@ function NavBar({ cartCount }) {
                     Products
                 </NavLink>
                 <NavLink to="/cart"  className={({ isActive }) =>
-                    `rounded-md px-3 py-2 mr-5 text-sm font-medium  ${isActive ? 'bg-custom-gradient text-white' : 'bg-custom-gradient text-black'}`
+                    `rounded-md px-3 py-2 mr-5 text-sm font-medium relative ${isActive ? 'bg-custom-gradient text-white' : 'bg-custom-gradient text-black'}`
                   }>
                     Cart
                     {cartCount > 0 && (
