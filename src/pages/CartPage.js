@@ -1,5 +1,6 @@
 // src/pages/CartPage.js
 import React, { useEffect, useState } from 'react';
+import CartItem from './CartItem';
 
 const CartPage = ({ cartItems, removeFromCart, updateQuantity }) => {
   const [totalPrice, setTotalPrice] = useState(0);
@@ -22,55 +23,19 @@ const CartPage = ({ cartItems, removeFromCart, updateQuantity }) => {
         <p>Your cart is empty.</p>
       ) : (
         cartItems.map((item) => (
-          <div key={item.id} className="flex justify-between items-center p-4 border-b">
-            <div className="flex items-center">
-              <img
-                src={item.image}
-                alt={item.title}
-                className="w-20 h-20 object-cover mr-4"
-              />
-              <div>
-                <h3 className="text-lg">{item.title}</h3>
-                <p>${item.price}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center">
-              <button
-                className="px-2 py-1 bg-gray-300"
-                onClick={() => updateQuantity(item.id, item.quantity - 1)}
-              >
-                -
-              </button>
-              <span className="px-4">{item.quantity}</span>
-              <button
-                className="px-2 py-1 bg-gray-300"
-                onClick={() => updateQuantity(item.id, item.quantity + 1)}
-              >
-                +
-              </button>
-            </div>
-
-            <p className="text-lg">
-              ${(item.price * item.quantity).toFixed(2)}
-            </p>
-
-            <button
-              onClick={() => removeFromCart(item.id)}
-              className="text-white bg-gradient-isInCart p-2 rounded-md"
-            >
-              Remove
-            </button>
-          </div>
+          <CartItem
+            key={item.id}
+            item={item}
+            removeFromCart={removeFromCart}
+            updateQuantity={updateQuantity}
+          />
         ))
       )}
 
       {/* Display total price */}
-      <div className="mt-4">
-        <h2 className="text-xl font-bold">
-          Total Price: ${totalPrice.toFixed(2)}
-        </h2>
-        <p className="text-gray-500">10% discount applied</p>
+      <div className="flex justify-between mt-6 text-center md:text-right">
+        <h2 className="text font-bold">Total Price: ${totalPrice.toFixed(2)}</h2>
+        <p className="text font-bold text-gray-500">10% discount applied</p>
       </div>
     </div>
   );
